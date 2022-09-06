@@ -1,6 +1,4 @@
-# First working solution
-# Tested in PyCharm using personal laptop because of lack of administration rights to install software.
-# It doesn't recognise negative numbers.
+# Completed solution.
 operators = {
     "+": (lambda x, y: x + y),
     "-": (lambda x, y: x - y),
@@ -10,16 +8,22 @@ operators = {
 
 
 def rpn_calculator(data):
-    basic_math_operators = ["+", "-", "*", "/"]
     stack_of_nums = []
     list_of_operators = []
     for ch in data.split():
+        # Check if the character is negative number.
+        if len(ch) == 2:
+            stack_of_nums.append(float(ch))
+            continue
+        # Check if the character is positive number.
         if ch.isdigit():
             stack_of_nums.append(float(ch))
-        elif ch in basic_math_operators:
+        # Check if the character operator.
+        elif ch in operators:
             list_of_operators.append(ch)
+        # In case of invalid input it returns error.
         else:
-            print("Invalid input data")
+            print("Error: Invalid input.")
             exit()
     result = stack_of_nums.pop()
     while stack_of_nums and list_of_operators:
